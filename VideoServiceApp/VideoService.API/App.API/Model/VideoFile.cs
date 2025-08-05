@@ -22,5 +22,5 @@ public class VideoFile
 	public string Description { get; set; }
 
 	// Navigation property for the many-to-many relationship
-	public ICollection<VideoFileCategory> VideoFileCategories { get; set; } = new List<VideoFileCategory>();
+	public ICollection<VideoFileCategory> VideoFileCategories { get; set; } = [];
 }

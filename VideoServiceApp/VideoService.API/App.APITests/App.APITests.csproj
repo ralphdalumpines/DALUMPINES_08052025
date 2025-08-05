@@ -28,10 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mocks\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\App.API\App.API.csproj" />
   </ItemGroup>
 

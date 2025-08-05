@@ -4,7 +4,8 @@ namespace App.API.Model;
 
 public class AppDbContext : DbContext
 {
-	public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+	public AppDbContext(DbContextOptions<AppDbContext> options)
+		: base(options)
 	{
 	}
 
@@ -48,6 +49,16 @@ public class AppDbContext : DbContext
 			.HasOne(vfc => vfc.Category)
 			.WithMany()
 			.HasForeignKey(vfc => vfc.CategoryId)
+			.OnDelete(DeleteBehavior.Cascade);
+
+		// Configure the relationship between VideoThumbnail and VideoFile
+		modelBuilder.Entity<VideoThumbnail>()
+			.HasKey(vt => vt.Id);
+
+		modelBuilder.Entity<VideoThumbnail>()
+			.HasOne(vt => vt.VideoFile)
+			.WithMany() // If VideoFile has a collection of VideoThumbnails, use .WithMany(vf => vf.VideoThumbnails)
+			.HasForeignKey(vt => vt.VideoFileId)
 			.OnDelete(DeleteBehavior.Cascade);
 	}
 }

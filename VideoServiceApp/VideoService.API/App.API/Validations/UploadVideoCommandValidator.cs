@@ -1,6 +1,7 @@
+using App.API.Implementation.Videos.Commands;
 using FluentValidation;
 
-namespace App.API.Implementation.Videos.Commands;
+namespace App.API.Validations;
 
 public class UploadVideoCommandValidator : AbstractValidator<UploadVideoCommand>
 {

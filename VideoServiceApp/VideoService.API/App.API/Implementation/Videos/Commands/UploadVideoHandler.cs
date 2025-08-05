@@ -18,6 +18,7 @@ public class UploadVideoHandler : IRequestHandler<UploadVideoCommand, VideoFile>
     {
         var file = request.File;
         var uploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+
         if (!Directory.Exists(uploadsDir))
             Directory.CreateDirectory(uploadsDir);
 
@@ -41,6 +42,8 @@ public class UploadVideoHandler : IRequestHandler<UploadVideoCommand, VideoFile>
         _dbContext.VideoFiles.Add(video);
         await _dbContext.SaveChangesAsync(cancellationToken);
 
-        return video;
+		//Return the video dto with thumbnail path
+
+		return video;
     }
 }   
