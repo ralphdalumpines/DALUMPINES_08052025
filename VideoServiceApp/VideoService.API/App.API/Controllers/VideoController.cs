@@ -24,7 +24,7 @@ public class VideoController : ControllerBase
     }
 
     [HttpPost("UploadVideo")]
-    public async Task<IActionResult> UploadVideo([FromForm] IFormFile file, [FromForm] string title, [FromForm] string description)
+    public async Task<IActionResult> UploadVideo(IFormFile file, [FromForm] string title, [FromForm] string description)
     {
         if (file == null || file.Length == 0)
             return BadRequest("No file uploaded."); 

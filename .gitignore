@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/VideoServiceApp/VideoService.API/App.API/.vs
+/VideoServiceApp/VideoService.API/App.API/bin/Debug/net8.0
+/VideoServiceApp/VideoService.API/App.API/obj
+/VideoServiceApp/VideoService.API/App.APITests/bin/Debug/net8.0
+/VideoServiceApp/VideoService.API/App.APITests/obj
