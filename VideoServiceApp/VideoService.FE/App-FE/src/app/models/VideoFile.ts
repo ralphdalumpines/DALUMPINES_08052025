@@ -4,4 +4,5 @@ export interface VideoFile {
   title: string;
   description: string;
   categories: string[];
+  videoUrl: string;
 }
