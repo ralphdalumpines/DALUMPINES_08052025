@@ -29,7 +29,19 @@ public class VideoController : ControllerBase
         return Ok(videos);		
     }
 
-    [HttpPost("UploadVideo")]
+    [HttpGet("GetVideo/{id}")]
+    public async Task<IActionResult> GetVideo(int id)
+    {
+        if (id <= 0)
+            return BadRequest("Invalid video ID.");
+        var video = await _mediator.Send(new GetVideoQuery(id));
+        
+        if (video == null)
+            return NotFound($"Video with ID {id} not found.");
+        return Ok(video);
+	}
+
+	[HttpPost("UploadVideo")]
     public async Task<IActionResult> UploadVideo(IFormFile file, [FromForm] string title, [FromForm] string description)
     {
         if (file == null || file.Length == 0)

@@ -7,11 +7,11 @@ namespace App.API.Implementation.Videos.Queries;
 
 public record GetVideosQuery : IRequest<Result<IList<VideoFileDto>>>;
 
-public class GetVideosHandler : IRequestHandler<GetVideosQuery, Result<IList<VideoFileDto>>>
+public class GetVideosQueryHandler : IRequestHandler<GetVideosQuery, Result<IList<VideoFileDto>>>
 {
 	private readonly AppDbContext _dbContext;
 
-	public GetVideosHandler(AppDbContext dbContext)
+	public GetVideosQueryHandler(AppDbContext dbContext)
 	{
 		_dbContext = dbContext;
 	}

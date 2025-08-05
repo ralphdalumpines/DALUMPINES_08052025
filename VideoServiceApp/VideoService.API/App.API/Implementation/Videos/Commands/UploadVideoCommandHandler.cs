@@ -8,11 +8,11 @@ namespace App.API.Implementation.Videos.Commands;
 
 public record UploadVideoCommand(IFormFile File, string Title, string Description) : IRequest<Result<VideoFile>>;
 
-public class UploadVideoHandler : IRequestHandler<UploadVideoCommand, Result<VideoFile>>
+public class UploadVideoCommandHandler : IRequestHandler<UploadVideoCommand, Result<VideoFile>>
 {
 	private readonly AppDbContext _dbContext;
 
-	public UploadVideoHandler(AppDbContext dbContext)
+	public UploadVideoCommandHandler(AppDbContext dbContext)
 	{
 		_dbContext = dbContext;
 	}

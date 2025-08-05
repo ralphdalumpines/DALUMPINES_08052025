@@ -22,8 +22,8 @@ internal abstract class BaseVideoTests : IDisposable
         // Register the DbContext and Mediator
         var services = new ServiceCollection();
         services.AddSingleton(_dbContext);
-        services.AddMediatR(typeof(GetVideosHandler).Assembly);
-		services.AddMediatR(typeof(UploadVideoHandler).Assembly);
+        services.AddMediatR(typeof(GetVideosQueryHandler).Assembly);
+		services.AddMediatR(typeof(UploadVideoCommandHandler).Assembly);
 
 		_serviceFactory = services.BuildServiceProvider().GetRequiredService<ServiceFactory>();
         _mediator = new Mediator(_serviceFactory);
