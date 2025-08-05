@@ -13,7 +13,7 @@ export class ListVideosComponent {
   videos = signal<VideoFile[]>([
     {
       id: 1,
-      thumbnail: 'assets/video1-thumbnail.jpg',
+      thumbnail: 'https://www.dummyimage.com/250x250/000/fff',
       title: 'Sample Video 1',
       description: 'This is a sample video description for video 1.',
       categories: ['Category1', 'Category2'],
@@ -21,7 +21,7 @@ export class ListVideosComponent {
     },
     {
       id: 2,
-      thumbnail: 'assets/video2-thumbnail.jpg', 
+      thumbnail: 'https://www.dummyimage.com/250x250/000/fff', 
       title: 'Sample Video 2',
       description: 'This is a sample video description for video 2.',
       categories: ['Category2', 'Category3'],
@@ -29,7 +29,7 @@ export class ListVideosComponent {
     },
     {
       id: 3,
-      thumbnail: 'assets/video3-thumbnail.jpg',
+      thumbnail: 'https://www.dummyimage.com/250x250/000/fff',
       title: 'Sample Video 3',
       description: 'This is a sample video description for video 3.',
       categories: ['Category1', 'Category3'],
@@ -37,7 +37,7 @@ export class ListVideosComponent {
     },
     { 
       id: 4,
-      thumbnail: 'assets/video4-thumbnail.jpg',
+      thumbnail: 'https://www.dummyimage.com/250x250/000/fff',
       title: 'Sample Video 4',
       description: 'This is a sample video description for video 4.',
       categories: ['Category1', 'Category2', 'Category3'],

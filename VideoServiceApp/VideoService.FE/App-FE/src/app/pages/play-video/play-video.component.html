@@ -1,0 +1,12 @@
+<div class="video-player-container">
+  @if (videoUrl()) {
+    <vg-player>
+    <video #media [vgMedia]="media" id="singleVideo" preload="auto" crossorigin>
+      <source [src]="videoUrl()" type="video/mp4">
+    </video>
+  </vg-player>
+  }
+  @else {
+    <div class="no-video">No video selected.</div>
+  } 
+</div>

@@ -1,0 +1,12 @@
+.video-player-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem auto;
+  max-width: 800px;
+}
+.no-video {
+  color: #888;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}

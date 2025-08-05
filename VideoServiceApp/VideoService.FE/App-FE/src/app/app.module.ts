@@ -8,6 +8,7 @@ import { UploadVideoComponent } from './pages/upload-video/upload-video.componen
 import { AppPrimaryButtonComponent } from './app-primary-button/app-primary-button.component';
 import { VideoCardComponent } from './video-card/video-card.component';
 import { ListVideosComponent } from './pages/list-videos/list-videos.component';
+import { PlayVideoComponent } from './pages/play-video/play-video.component';
 
 @NgModule({
   declarations: [        
@@ -20,13 +21,15 @@ import { ListVideosComponent } from './pages/list-videos/list-videos.component';
     UploadVideoComponent,
     AppPrimaryButtonComponent,
     VideoCardComponent,
-    ListVideosComponent
+    ListVideosComponent,
+    PlayVideoComponent
   ],
   exports: [    
     UploadVideoComponent,
     AppPrimaryButtonComponent,
     VideoCardComponent,
-    ListVideosComponent
+    ListVideosComponent,
+    PlayVideoComponent
   ],
   providers: [],
   bootstrap: []
