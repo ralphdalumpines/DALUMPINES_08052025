@@ -8,3 +8,6 @@
 /VideoServiceApp/VideoService.API/App.API/obj
 /VideoServiceApp/VideoService.API/App.APITests/bin/Debug/net8.0
 /VideoServiceApp/VideoService.API/App.APITests/obj
+VideoServiceApp/VideoService.FE/App-FE/.editorconfig
+VideoServiceApp/VideoService.FE/App-FE/package-lock.json
+VideoServiceApp/VideoService.FE/App-FE/.editorconfig

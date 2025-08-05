@@ -1,0 +1,10 @@
+<div class="video-card">
+  <img [src]="thumbnail" [alt]="title" class="video-thumbnail" />
+  <div class="video-info">
+    <h3>{{ title }}</h3>
+    <p>{{ description }}</p>
+    <div class="categories">
+      <span *ngFor="let cat of categories" class="category">{{ cat }}</span>
+    </div>
+  </div>
+</div>

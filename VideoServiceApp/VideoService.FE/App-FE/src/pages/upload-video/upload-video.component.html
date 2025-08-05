@@ -1,7 +1,13 @@
 <form>
+
   <div>
     <label for="title">Title</label>
     <input id="title" name="title" type="text" maxlength="100" required [(ngModel)]="title"/>
+  </div>
+
+  <div>
+    <label for="video">Video File</label>
+    <input id="video" name="video" type="file" accept="video/*" (change)="onFileSelected($event)" required />
   </div>
 
   <div>
@@ -11,11 +17,11 @@
   </div>
 
   <div>
-    <label for="category">Category</label>
-    <select id="category" name="category" required [(ngModel)]="category">
-      <option value="" disabled selected>Select category</option>
-      <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
-    </select>
+    <label>Categories</label>
+    <div *ngFor="let cat of categories">
+      <input type="checkbox" [id]="'cat-' + cat.id" [value]="cat.id" (change)="onCategoryChange(cat.id, $event.target.checked)">
+      <label [for]="'cat-' + cat.id">{{ cat.name }}</label>
+    </div>
   </div>
 
   <button type="submit">Upload Video</button>
