@@ -19,7 +19,7 @@
   <div>
     <label>Categories</label>
     <div *ngFor="let cat of categories">
-      <input type="checkbox" [id]="'cat-' + cat.id" [value]="cat.id" (change)="onCategoryChange(cat.id, $event.target.checked)">
+      <input type="checkbox" [id]="'cat-' + cat.id" [value]="cat.id" (change)="onCategoryChange(cat.id, false)">
       <label [for]="'cat-' + cat.id">{{ cat.name }}</label>
     </div>
   </div>

@@ -1,11 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { VideoFile } from '../../models/VideoFile';
 
-interface Video {
-  thumbnail: string;
-  title: string;
-  description: string;
-  categories: string[];
-}
 
 @Component({
   selector: 'app-list-videos',
@@ -14,18 +9,34 @@ interface Video {
 })
 
 export class ListVideosComponent {
-  videos: Video[] = [
+  videos = signal<VideoFile[]>([
     {
-      thumbnail: 'assets/sample1.jpg',
+      id: 1,
+      thumbnail: 'assets/video1-thumbnail.jpg',
       title: 'Sample Video 1',
-      description: 'Description for video 1',
-      categories: ['Education', 'Music']
+      description: 'This is a sample video description for video 1.',
+      categories: ['Category1', 'Category2']
     },
     {
-      thumbnail: 'assets/sample2.jpg',
+        id: 2,
+      thumbnail: 'assets/video2-thumbnail.jpg', 
       title: 'Sample Video 2',
-      description: 'Description for video 2',
-      categories: ['Sports']
-    }
-  ];
+      description: 'This is a sample video description for video 2.',
+      categories: ['Category2', 'Category3']
+    },
+    {
+        id: 3,
+      thumbnail: 'assets/video3-thumbnail.jpg',
+      title: 'Sample Video 3',
+      description: 'This is a sample video description for video 3.',
+      categories: ['Category1', 'Category3']
+    },
+    { 
+        id: 4,
+      thumbnail: 'assets/video4-thumbnail.jpg',
+      title: 'Sample Video 4',
+      description: 'This is a sample video description for video 4.',
+      categories: ['Category1', 'Category2', 'Category3']
+    } 
+  ]);
 }

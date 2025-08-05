@@ -1,11 +1,6 @@
 <div class="video-list">
       @for (video of videos(); track video.id)
       {
-        <app-video-card
-              [thumbnail]="video.thumbnail"
-              [title]="video.title"
-              [description]="video.description"
-              [categories]="video.categories">
-         </app-video-card>
+        <app-video-card [video]="video" />       
       }
 </div>

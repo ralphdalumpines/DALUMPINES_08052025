@@ -9,8 +9,7 @@ import { VideoCardComponent } from './video-card/video-card.component';
 import { ListVideosComponent } from '../pages/list-videos/list-videos.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
+  declarations: [    
     UploadVideoComponent,
     AppPrimaryButtonComponent,
     VideoCardComponent,
@@ -22,6 +21,6 @@ import { ListVideosComponent } from '../pages/list-videos/list-videos.component'
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
 export class AppModule { }
