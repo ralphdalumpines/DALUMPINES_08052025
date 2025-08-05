@@ -1,0 +1,22 @@
+<form>
+  <div>
+    <label for="title">Title</label>
+    <input id="title" name="title" type="text" maxlength="100" required [(ngModel)]="title"/>
+  </div>
+
+  <div>
+    <label for="description">Description (max 160 chars)</label>
+    <textarea id="description" name="description" maxlength="160" required [(ngModel)]="description"></textarea>
+    <small>{{description.length}} / 160 characters</small>
+  </div>
+
+  <div>
+    <label for="category">Category</label>
+    <select id="category" name="category" required [(ngModel)]="category">
+      <option value="" disabled selected>Select category</option>
+      <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+    </select>
+  </div>
+
+  <button type="submit">Upload Video</button>
+</form>
