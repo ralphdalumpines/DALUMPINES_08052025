@@ -1,4 +1,4 @@
-<button [type]="type" class="app-primary-btn">
-  {{ label }}
+<button [type]="type()" class="app-primary-btn">
+  {{ label() }}
   <ng-content></ng-content>
 </button>
