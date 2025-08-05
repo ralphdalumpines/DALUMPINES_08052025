@@ -30,16 +30,16 @@ internal class UploadVideoTests : BaseVideoTests
 	[Test]
 	public async Task UploadVideo_SavesVideoAndReturnsVideo()
 	{
-		var fileMock = FormFileMocks.CreateMockFormFile("test.mp4", "video/mp4", []);
+		var fileMock = FormFileMocks.CreateMockFormFile("test.mp4", "video/mp4", [0x41, 0x42, 0x43, 0x44]);
 
 		var command = new UploadVideoCommand(fileMock, "title", "desc");
-		var video = await _mediator.Send(command);
+		var result = await _mediator.Send(command);
 
 		//Assert
-		Assert.IsNotNull(video);
-		Assert.AreEqual("title", video.Title);
-		Assert.AreEqual("desc", video.Description);
-		Assert.AreEqual(".mp4", video.ExtensionType);
+		Assert.IsNotNull(result);
+		Assert.AreEqual("title", result.Value.Title);
+		Assert.AreEqual("desc", result.Value.Description);
+		Assert.AreEqual(".mp4", result.Value.ExtensionType);
 		Assert.IsTrue(_dbContext.VideoFiles.Any(v => v.Title == "title"));
 	}
 }

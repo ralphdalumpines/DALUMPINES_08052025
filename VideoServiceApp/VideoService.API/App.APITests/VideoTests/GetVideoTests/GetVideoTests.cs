@@ -18,7 +18,7 @@ internal class GetVideoTests : BaseVideoTests
 
 		// Assert
 		Assert.IsNotNull(result);
-		Assert.IsEmpty(result);
+		Assert.IsEmpty(result.Value);
 	}
 
 	[Test]
@@ -34,7 +34,7 @@ internal class GetVideoTests : BaseVideoTests
 
 		// Assert
 		Assert.IsNotNull(result);
-		Assert.IsNotEmpty(result);
-		Assert.IsNotEmpty(videoFiles.First().Title, result.First().Title);
+		Assert.IsNotEmpty(result.Value);
+		Assert.IsNotEmpty(videoFiles.First().Title, result.Value.First().Title);
 	}
 }

@@ -60,6 +60,7 @@ public class GetVideosHandler : IRequestHandler<GetVideosQuery, Result<IList<Vid
 					Path = vt.Path
 				})
 				.FirstOrDefaultAsync(cancellationToken);
+
 			video.Thumbnail = thumbnail;
 		}
 

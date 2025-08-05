@@ -1,5 +1,6 @@
 using App.API.Dto;
 using App.API.Model;
+using App.API.Service;
 using App.API.Validations;
 using MediatR;
 
@@ -24,9 +25,9 @@ public class UploadVideoHandler : IRequestHandler<UploadVideoCommand, Result<Vid
 		if (!Directory.Exists(uploadsDir))
 			Directory.CreateDirectory(uploadsDir);
 
-		var filePath = Path.Combine(uploadsDir, file.FileName);
+		var videoPath = Path.Combine(uploadsDir, file.FileName);
 
-		using (var stream = new FileStream(filePath, FileMode.Create))
+		using (var stream = new FileStream(videoPath, FileMode.Create))
 		{
 			await file.CopyToAsync(stream, cancellationToken);
 		}
@@ -35,7 +36,7 @@ public class UploadVideoHandler : IRequestHandler<UploadVideoCommand, Result<Vid
 		{
 			Title = request.Title,
 			Description = request.Description,
-			Path = filePath,
+			Path = videoPath,
 			DateUploaded = DateTime.UtcNow,
 			Size = (int)file.Length,
 			ExtensionType = Path.GetExtension(file.FileName)
@@ -44,11 +45,20 @@ public class UploadVideoHandler : IRequestHandler<UploadVideoCommand, Result<Vid
 		var validator = new VideoFileValidator();
 		FluentValidation.Results.ValidationResult result = validator.Validate(video);
 
-		if (!result.IsValid)		
+		if (!result.IsValid)
 			return Result<VideoFile>.Failure(result.Errors.FirstOrDefault()?.ErrorMessage ?? "Validation failed");
-		
+
 		_dbContext.VideoFiles.Add(video);
 		await _dbContext.SaveChangesAsync(cancellationToken);
+
+		var thumbnailDir = Path.Combine(Directory.GetCurrentDirectory(), "Thumbnails");
+
+		if (!Directory.Exists(thumbnailDir))
+			Directory.CreateDirectory(thumbnailDir);
+
+		var thumbnailPath = Path.Combine(thumbnailDir, Path.GetFileNameWithoutExtension(file.FileName) + ".jpg");
+
+		VideoThumbnailService.GenerateThumbnail(videoPath, thumbnailPath);
 
 		return Result<VideoFile>.Success(video);
 	}
