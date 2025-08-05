@@ -1,7 +1,12 @@
+using App.API.Dto;
+using App.API.Implementation.Videos.Commands;
+using App.API.Implementation.Videos.Queries;
 using App.API.Model;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
 public class VideoTests : IDisposable
@@ -9,24 +14,20 @@ public class VideoTests : IDisposable
     private AppDbContext _dbContext;
     private IMediator _mediator;
     private ServiceFactory _serviceFactory;
-
-    [SetUp]
+	[SetUp]
     public void Setup()
     {
         var options = new DbContextOptionsBuilder<AppDbContext>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
         _dbContext = new AppDbContext(options);
-
-        // Register handlers for MediatR
-        _serviceFactory = type =>
-        {
-            if (type == typeof(IRequestHandler<GetVideosQuery, IEnumerable<VideoFile>>))
-                return new GetVideosHandler(_dbContext);
-            if (type == typeof(IRequestHandler<UploadVideoCommand, VideoFile>))
-                return new UploadVideoHandler(_dbContext);
-            return null;
-        };
+	
+        
+        // Register the DbContext and Mediator
+        var services = new ServiceCollection();
+        services.AddSingleton(_dbContext);
+        services.AddMediatR(typeof(GetVideosHandler).Assembly);
+        _serviceFactory = services.BuildServiceProvider().GetRequiredService<ServiceFactory>();
         _mediator = new Mediator(_serviceFactory);
     }
 
@@ -49,7 +50,7 @@ public class VideoTests : IDisposable
             DateUploaded = DateTime.UtcNow,
             Size = 123,
             ExtensionType = ".mp4",
-            Categories = new List<Category>()
+            VideoFileCategories = []
         });
         _dbContext.SaveChanges();
 

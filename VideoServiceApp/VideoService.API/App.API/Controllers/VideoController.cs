@@ -1,6 +1,8 @@
-using App.API.Model;
-using Microsoft.AspNetCore.Mvc;
+using App.API.Dto;
+using App.API.Implementation.Videos.Commands;
+using App.API.Implementation.Videos.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace App.API.Controllers;
 
@@ -18,7 +20,7 @@ public class VideoController : ControllerBase
     }
 
     [HttpGet("GetVideos")]
-    public async Task<IEnumerable<VideoFile>> GetVideos()
+    public async Task<IList<VideoFileDto>> GetVideos()
     {
         return await _mediator.Send(new GetVideosQuery());
     }
@@ -30,6 +32,7 @@ public class VideoController : ControllerBase
             return BadRequest("No file uploaded."); 
 
         var video = await _mediator.Send(new UploadVideoCommand(file, title, description));
+
         return Ok(video);
     }
 }

@@ -1,7 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace App.API.Model;
 
+[Table("VideoFile", Schema = "dbo")]
 public class VideoFile
 {
+	[Key]
 	public int Id { get; set; }
 
 	public DateTime DateUploaded { get; set; }
@@ -16,5 +21,6 @@ public class VideoFile
 
 	public string Description { get; set; }
 
-	public List<Category> Categories { get; set; }
+	// Navigation property for the many-to-many relationship
+	public ICollection<VideoFileCategory> VideoFileCategories { get; set; } = new List<VideoFileCategory>();
 }

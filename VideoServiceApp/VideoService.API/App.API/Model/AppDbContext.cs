@@ -4,7 +4,9 @@ namespace App.API.Model;
 
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+	public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+	{
+	}
 
     public DbSet<VideoFile> VideoFiles { get; set; }
 
@@ -14,22 +16,6 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Configure the join entity for many-to-many relationship
-        modelBuilder.Entity<VideoFileCategory>()
-            .HasKey(vfc => new { vfc.VideoFileId, vfc.CategoryId });
-
-        modelBuilder.Entity<VideoFileCategory>()
-            .HasOne(vfc => vfc.VideoFile)
-            .WithMany()
-            .HasForeignKey(vfc => vfc.VideoFileId)
-            .OnDelete(DeleteBehavior.Cascade);
-
-        modelBuilder.Entity<VideoFileCategory>()
-            .HasOne(vfc => vfc.Category)
-            .WithMany()
-            .HasForeignKey(vfc => vfc.CategoryId)
-            .OnDelete(DeleteBehavior.Cascade);
-
         // Explicitly configure primary keys for VideoFile and Category
         modelBuilder.Entity<VideoFile>()
             .HasKey(v => v.Id);
@@ -47,5 +33,21 @@ public class AppDbContext : DbContext
             .HasMany<VideoFileCategory>()
             .WithOne(vfc => vfc.Category)
             .HasForeignKey(vfc => vfc.CategoryId);
-    }
+
+		// Configure the join entity for many-to-many relationship
+		modelBuilder.Entity<VideoFileCategory>()
+			.HasKey(vfc => new { vfc.VideoFileId, vfc.CategoryId });
+
+		modelBuilder.Entity<VideoFileCategory>()
+			.HasOne(vfc => vfc.VideoFile)
+			.WithMany()
+			.HasForeignKey(vfc => vfc.VideoFileId)
+			.OnDelete(DeleteBehavior.Cascade);
+
+		modelBuilder.Entity<VideoFileCategory>()
+			.HasOne(vfc => vfc.Category)
+			.WithMany()
+			.HasForeignKey(vfc => vfc.CategoryId)
+			.OnDelete(DeleteBehavior.Cascade);
+	}
 }

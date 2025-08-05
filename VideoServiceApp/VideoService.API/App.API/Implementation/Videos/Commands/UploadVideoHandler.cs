@@ -1,6 +1,10 @@
 using App.API.Model;
 using MediatR;
 
+namespace App.API.Implementation.Videos.Commands;
+
+public record UploadVideoCommand(IFormFile File, string Title, string Description) : IRequest<VideoFile>;
+
 public class UploadVideoHandler : IRequestHandler<UploadVideoCommand, VideoFile>
 {
     private readonly AppDbContext _dbContext;

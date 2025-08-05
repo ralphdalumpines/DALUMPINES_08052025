@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace App.API.Model;
 
+[Table("VideoFileCategory", Schema = "dbo")]
 public class VideoFileCategory
 {
 	// This class represents the join entity for the many-to-many relationship
