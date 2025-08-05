@@ -1,12 +1,12 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { AppPrimaryButtonComponent } from './app-primary-button/app-primary-button.component';
+import { ListVideosComponent } from './pages/list-videos/list-videos.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [ AppPrimaryButtonComponent, ListVideosComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  standalone: true
 })
 
 export class AppComponent {

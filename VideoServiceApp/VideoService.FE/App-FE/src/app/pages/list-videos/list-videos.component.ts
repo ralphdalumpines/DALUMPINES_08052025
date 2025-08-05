@@ -1,10 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { VideoFile } from '../../models/VideoFile';
+import { VideoCardComponent } from '../../video-card/video-card.component';
 
 @Component({
   selector: 'app-list-videos',
   templateUrl: './list-videos.component.html',
   styleUrls: ['./list-videos.component.css'],
+  imports: [VideoCardComponent]
 })
 
 export class ListVideosComponent {

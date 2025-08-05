@@ -3,22 +3,30 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UploadVideoComponent } from './pages/upload-video/upload-video.component';
 import { AppPrimaryButtonComponent } from './app-primary-button/app-primary-button.component';
 import { VideoCardComponent } from './video-card/video-card.component';
 import { ListVideosComponent } from './pages/list-videos/list-videos.component';
 
 @NgModule({
-  declarations: [    
+  declarations: [        
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    NgbModule,
     UploadVideoComponent,
     AppPrimaryButtonComponent,
     VideoCardComponent,
     ListVideosComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule
+  exports: [    
+    UploadVideoComponent,
+    AppPrimaryButtonComponent,
+    VideoCardComponent,
+    ListVideosComponent
   ],
   providers: [],
   bootstrap: []

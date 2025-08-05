@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 interface Category {
@@ -13,9 +13,10 @@ interface Category {
 })
 
 export class UploadVideoComponent implements OnInit {
-  title: string = '';
+  title = signal<string>('');
   description: string = '';
   selectedFile: File | null = null;
+
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {

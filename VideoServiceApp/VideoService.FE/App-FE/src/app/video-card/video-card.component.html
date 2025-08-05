@@ -4,7 +4,10 @@
     <h3>{{ video().title }}</h3>
     <p>{{ video().description }}</p>
     <div class="categories">
-      <span *ngFor="let cat of video().categories" class="category">{{ cat }}</span>
+        @for (cat of video().categories; track cat)
+        {
+          <span class="category">{{ cat }}</span>
+        }
     </div>
   </div>
 </div>

@@ -2,7 +2,7 @@
 
   <div>
     <label for="title">Title</label>
-    <input id="title" name="title" type="text" maxlength="100" required [(ngModel)]="title"/>
+    <input id="title" name="title" type="text" maxlength="100" required />
   </div>
 
   <div>
@@ -12,16 +12,19 @@
 
   <div>
     <label for="description">Description (max 160 chars)</label>
-    <textarea id="description" name="description" maxlength="160" required [(ngModel)]="description"></textarea>
+    <textarea id="description" name="description" maxlength="160" required ></textarea>
     <small>{{description.length}} / 160 characters</small>
   </div>
 
   <div>
     <label>Categories</label>
-    <div *ngFor="let cat of categories">
-      <input type="checkbox" [id]="'cat-' + cat.id" [value]="cat.id" (change)="onCategoryChange(cat.id, false)">
-      <label [for]="'cat-' + cat.id">{{ cat.name }}</label>
-    </div>
+    @for (cat of categories; track cat.id)
+    {
+      <div>
+        <input type="checkbox" [id]="'cat-' + cat.id" [value]="cat.id" >
+        <label [for]="'cat-' + cat.id">{{ cat.name }}</label>
+      </div>
+    }   
   </div>
 
   <button type="submit">Upload Video</button>
