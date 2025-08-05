@@ -2,11 +2,13 @@ using App.API.Dto;
 using App.API.Model;
 using App.API.Service;
 using App.API.Validations;
+using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.API.Implementation.Videos.Commands;
 
-public record UploadVideoCommand(IFormFile File, string Title, string Description) : IRequest<Result<VideoFile>>;
+public record UploadVideoCommand(IFormFile File, string Title, string Description, List<CategoryDto> Categories) : IRequest<Result<VideoFile>>;
 
 public class UploadVideoCommandHandler : IRequestHandler<UploadVideoCommand, Result<VideoFile>>
 {
@@ -50,6 +52,26 @@ public class UploadVideoCommandHandler : IRequestHandler<UploadVideoCommand, Res
 
 		_dbContext.VideoFiles.Add(video);
 		await _dbContext.SaveChangesAsync(cancellationToken);
+
+		var videoFileCatValidator = new VideoFileCategoryValidator();
+		result = videoFileCatValidator.Validate(request.Categories);
+
+		if (!result.IsValid)
+			return Result<VideoFile>.Failure(result.Errors.FirstOrDefault()?.ErrorMessage ?? "Category validation failed");
+
+		var categoriesVideo = _dbContext.VideoFileCategories.Where(c => c.VideoFileId == video.Id).Select(c => c.CategoryId).ToList();
+
+		foreach (var category in request.Categories)
+		{
+			if (categoriesVideo.Contains(category.Id)) 
+				continue;
+
+			_dbContext.VideoFileCategories.Add(new VideoFileCategory
+			{
+				VideoFileId = video.Id,
+				CategoryId = category.Id
+			});
+		}
 
 		var thumbnailDir = Path.Combine(Directory.GetCurrentDirectory(), "Thumbnails");
 

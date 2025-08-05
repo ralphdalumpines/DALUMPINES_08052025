@@ -5,7 +5,6 @@ using App.API.Validations;
 using FluentValidation.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace App.API.Controllers;
 
@@ -42,12 +41,12 @@ public class VideoController : ControllerBase
 	}
 
 	[HttpPost("UploadVideo")]
-    public async Task<IActionResult> UploadVideo(IFormFile file, [FromForm] string title, [FromForm] string description)
+    public async Task<IActionResult> UploadVideo(IFormFile file, [FromForm] string title, [FromForm] string description, [FromForm] List<CategoryDto> categories)
     {
         if (file == null || file.Length == 0)
             return BadRequest("No file uploaded."); 
 
-        var command = new UploadVideoCommand(file, title, description);
+        var command = new UploadVideoCommand(file, title, description, categories);
 
         // Instantiate the validator
         var validator = new UploadVideoCommandValidator();
