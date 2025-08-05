@@ -1,3 +1,4 @@
+using App.API.Implementation.Videos.Commands;
 using App.API.Implementation.Videos.Queries;
 using App.API.Model;
 using MediatR;
@@ -22,7 +23,9 @@ internal abstract class BaseVideoTests : IDisposable
         var services = new ServiceCollection();
         services.AddSingleton(_dbContext);
         services.AddMediatR(typeof(GetVideosHandler).Assembly);
-        _serviceFactory = services.BuildServiceProvider().GetRequiredService<ServiceFactory>();
+		services.AddMediatR(typeof(UploadVideoHandler).Assembly);
+
+		_serviceFactory = services.BuildServiceProvider().GetRequiredService<ServiceFactory>();
         _mediator = new Mediator(_serviceFactory);
     }   
    

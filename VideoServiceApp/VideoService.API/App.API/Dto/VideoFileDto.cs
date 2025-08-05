@@ -11,4 +11,6 @@ public class VideoFileDto
 	public required string Description { get; set; }
 	 
 	public List<CategoryDto> Categories { get; set; }
+
+	public VideoThumbnailDto? Thumbnail { get; set; }
 }

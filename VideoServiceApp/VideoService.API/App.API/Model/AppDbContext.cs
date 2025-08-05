@@ -15,7 +15,10 @@ public class AppDbContext : DbContext
 
     public DbSet<VideoFileCategory> VideoFileCategories { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+	public DbSet<VideoThumbnail> VideoThumbnails { get; set; }
+
+
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Explicitly configure primary keys for VideoFile and Category
         modelBuilder.Entity<VideoFile>()
@@ -30,7 +33,14 @@ public class AppDbContext : DbContext
             .WithOne(vfc => vfc.VideoFile)
             .HasForeignKey(vfc => vfc.VideoFileId);
 
-        modelBuilder.Entity<Category>()
+		// Configure the one-to-one relationship between VideoFile and VideoThumbnail (Thumbnail property)
+		modelBuilder.Entity<VideoFile>()
+			.HasOne(vf => vf.Thumbnail)
+			.WithOne()
+			.HasForeignKey<VideoThumbnail>(vt => vt.VideoFileId)
+			.OnDelete(DeleteBehavior.Cascade);
+
+		modelBuilder.Entity<Category>()
             .HasMany<VideoFileCategory>()
             .WithOne(vfc => vfc.Category)
             .HasForeignKey(vfc => vfc.CategoryId);

@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace App.API.Implementation.Videos.Queries;
 
-public record GetVideosQuery : IRequest<IList<VideoFileDto>>;
+public record GetVideosQuery : IRequest<Result<IList<VideoFileDto>>>;
 
-public class GetVideosHandler : IRequestHandler<GetVideosQuery, IList<VideoFileDto>>
+public class GetVideosHandler : IRequestHandler<GetVideosQuery, Result<IList<VideoFileDto>>>
 {
 	private readonly AppDbContext _dbContext;
 
@@ -16,7 +16,7 @@ public class GetVideosHandler : IRequestHandler<GetVideosQuery, IList<VideoFileD
 		_dbContext = dbContext;
 	}
 
-	public async Task<IList<VideoFileDto>> Handle(GetVideosQuery request, CancellationToken cancellationToken)
+	public async Task<Result<IList<VideoFileDto>>> Handle(GetVideosQuery request, CancellationToken cancellationToken)
 	{
 		if (request == null)
 			throw new ArgumentNullException(nameof(request), "Request parameters cannot be null");
@@ -25,7 +25,6 @@ public class GetVideosHandler : IRequestHandler<GetVideosQuery, IList<VideoFileD
 			throw new OperationCanceledException("Operation was canceled", cancellationToken);
 
 		var query = _dbContext.VideoFiles
-			.Include(vf => vf.VideoFileCategories)		
 			.AsNoTracking();
 
 		var results = await query.Select(vf => new VideoFileDto
@@ -33,7 +32,7 @@ public class GetVideosHandler : IRequestHandler<GetVideosQuery, IList<VideoFileD
 			Id = vf.Id,
 			Title = vf.Title,
 			Description = vf.Description,
-			Path = vf.Path
+			Path = vf.Path			
 		}).ToListAsync(cancellationToken);
 
 		// Join with video categories then categories
@@ -50,6 +49,20 @@ public class GetVideosHandler : IRequestHandler<GetVideosQuery, IList<VideoFileD
 			})];
 		}
 
-		return results;
+		//Join with thumbnails
+		foreach (var video in results)
+		{
+			var thumbnail = await _dbContext.VideoThumbnails
+				.Where(vt => vt.VideoFileId == video.Id)
+				.Select(vt => new VideoThumbnailDto
+				{
+					Id = vt.Id,
+					Path = vt.Path
+				})
+				.FirstOrDefaultAsync(cancellationToken);
+			video.Thumbnail = thumbnail;
+		}
+
+		return Result<IList<VideoFileDto>>.Success(results);
 	}
 }

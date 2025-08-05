@@ -25,6 +25,10 @@ internal class GetVideoTests : BaseVideoTests
 	public async Task GetVideos_ReturnsVideos_WhenVideosExistAsync()
 	{
 		var videoFiles  = VideoFileMockHelpers.GenerateEntities(_dbContext);
+		foreach (var videoFile in videoFiles)
+		{
+			videoFile.Thumbnail = VideoThumbnailMockHelpers.GenerateEntities(_dbContext, videoFile.Id);
+		}
 
 		var result = await _mediator.Send(new GetVideosQuery());
 

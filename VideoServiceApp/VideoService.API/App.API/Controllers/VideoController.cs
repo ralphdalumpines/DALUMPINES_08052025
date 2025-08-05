@@ -5,6 +5,7 @@ using App.API.Validations;
 using FluentValidation.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace App.API.Controllers;
 
@@ -22,9 +23,10 @@ public class VideoController : ControllerBase
     }
 
     [HttpGet("GetVideos")]
-    public async Task<IList<VideoFileDto>> GetVideos()
+    public async Task<IActionResult> GetVideos()
     {
-        return await _mediator.Send(new GetVideosQuery());
+		var videos = await _mediator.Send(new GetVideosQuery());
+        return Ok(videos);		
     }
 
     [HttpPost("UploadVideo")]
