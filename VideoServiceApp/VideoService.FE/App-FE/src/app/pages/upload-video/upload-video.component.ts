@@ -16,15 +16,6 @@ export class UploadVideoComponent implements OnInit {
   title = signal<string>('');
   description: string = '';
   selectedFile: File | null = null;
-
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
-    } else {
-      this.selectedFile = null;
-    }
-  }
   categories: Category[] = [];
   selectedCategories: number[] = [];
 
@@ -41,6 +32,15 @@ export class UploadVideoComponent implements OnInit {
       this.selectedCategories.push(id);
     } else {
       this.selectedCategories = this.selectedCategories.filter(catId => catId !== id);
+    }
+  } 
+
+   onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    } else {
+      this.selectedFile = null;
     }
   }
 }

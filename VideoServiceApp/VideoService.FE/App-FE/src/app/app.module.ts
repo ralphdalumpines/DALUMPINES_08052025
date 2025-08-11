@@ -5,10 +5,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UploadVideoComponent } from './pages/upload-video/upload-video.component';
-import { AppPrimaryButtonComponent } from './app-primary-button/app-primary-button.component';
-import { VideoCardComponent } from './video-card/video-card.component';
+import { AppPrimaryButtonComponent } from './components/primary-button/app-primary-button.component';
+import { VideoCardComponent } from './components/video-card/video-card.component';
 import { ListVideosComponent } from './pages/list-videos/list-videos.component';
 import { PlayVideoComponent } from './pages/play-video/play-video.component';
+import { TooltipComponent } from './components/tooltip/tooltip.component';
 
 @NgModule({
   declarations: [        
@@ -22,14 +23,16 @@ import { PlayVideoComponent } from './pages/play-video/play-video.component';
     AppPrimaryButtonComponent,
     VideoCardComponent,
     ListVideosComponent,
-    PlayVideoComponent
+    PlayVideoComponent,
+    TooltipComponent
   ],
   exports: [    
     UploadVideoComponent,
     AppPrimaryButtonComponent,
     VideoCardComponent,
     ListVideosComponent,
-    PlayVideoComponent
+    PlayVideoComponent,
+    TooltipComponent
   ],
   providers: [],
   bootstrap: []

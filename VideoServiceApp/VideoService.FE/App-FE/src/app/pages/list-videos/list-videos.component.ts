@@ -1,6 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VideoFile } from '../../models/VideoFile';
-import { VideoCardComponent } from '../../video-card/video-card.component';
+import { VideoFileService } from '../../services/video-file.service';
+import { VideoCardComponent } from '../../components/video-card/video-card.component';
+import { Result } from '../../models/Result';
 
 @Component({
   selector: 'app-list-videos',
@@ -9,39 +11,20 @@ import { VideoCardComponent } from '../../video-card/video-card.component';
   imports: [VideoCardComponent]
 })
 
-export class ListVideosComponent {
-  videos = signal<VideoFile[]>([
-    {
-      id: 1,
-      thumbnail: 'https://www.dummyimage.com/250x250/000/fff',
-      title: 'Sample Video 1',
-      description: 'This is a sample video description for video 1.',
-      categories: ['Category1', 'Category2'],
-      videoUrl: 'assets/video1.mp4'
-    },
-    {
-      id: 2,
-      thumbnail: 'https://www.dummyimage.com/250x250/000/fff', 
-      title: 'Sample Video 2',
-      description: 'This is a sample video description for video 2.',
-      categories: ['Category2', 'Category3'],
-      videoUrl: 'assets/video2.mp4'
-    },
-    {
-      id: 3,
-      thumbnail: 'https://www.dummyimage.com/250x250/000/fff',
-      title: 'Sample Video 3',
-      description: 'This is a sample video description for video 3.',
-      categories: ['Category1', 'Category3'],
-      videoUrl: 'assets/video3.mp4'
-    },
-    { 
-      id: 4,
-      thumbnail: 'https://www.dummyimage.com/250x250/000/fff',
-      title: 'Sample Video 4',
-      description: 'This is a sample video description for video 4.',
-      categories: ['Category1', 'Category2', 'Category3'],
-      videoUrl: 'assets/video4.mp4'
-    } 
-  ]);
+export class ListVideosComponent implements OnInit {
+  videoResult: Result<VideoFile[]> = { value: [] , isSuccess: true, error: '' };
+  videos : VideoFile[] = [];
+
+  constructor(private videoFileService: VideoFileService) {
+    videoFileService.getVideoFiles().subscribe({
+      next: (data) => {
+        this.videoResult = data;
+        this.videos = data.value; // Assuming data.value is an array of VideoFile
+      },
+      error: (err) => console.error('Failed to fetch videos', err)
+    });
+  }
+
+  ngOnInit() {
+  }
 }

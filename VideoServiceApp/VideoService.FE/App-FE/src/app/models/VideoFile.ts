@@ -1,8 +1,11 @@
+import { Category } from "./Category";
+import { Thumbnail } from "./Thumbnail";
+
 export interface VideoFile {
   id: number;
-  thumbnail: string;
+  thumbnail: Thumbnail;
   title: string;
   description: string;
-  categories: string[];
+  categories: Category[];
   videoUrl: string;
 }

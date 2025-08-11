@@ -1,10 +1,10 @@
 <div class="video-player-container">
   @if (videoUrl()) {
-    <vg-player>
-    <video #media [vgMedia]="media" id="singleVideo" preload="auto" crossorigin>
-      <source [src]="videoUrl()" type="video/mp4">
-    </video>
-  </vg-player>
+     <video width="320" height="240" autoplay>
+        <source src="movie.mp4" type="video/mp4">
+        <source src="movie.ogg" type="video/ogg">
+          Your browser does not support the video tag.
+     </video>
   }
   @else {
     <div class="no-video">No video selected.</div>

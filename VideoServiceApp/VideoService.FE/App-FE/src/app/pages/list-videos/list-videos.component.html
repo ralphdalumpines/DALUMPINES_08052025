@@ -1,5 +1,5 @@
 <div class="video-list p-8 grid grid-cols-2 gap-4">
-      @for (video of videos(); track video.id)
+      @for (video of videos; track video)
       {
         <app-video-card [video]="video" />       
       }

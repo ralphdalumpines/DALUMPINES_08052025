@@ -1,8 +1,13 @@
-<div class="bg-slate-200 px-4 py-3 shadow-md flex justify-between items-center">
-  <h1>Welcome to {{ title() }}!</h1>
-  <app-primary-button class="bg-blue-500 text-white px-4 py-2 rounded" (click) = "handleUploadButton()">
-    Upload Video
-  </app-primary-button >
-</div>
+
+<nav class="custom-navbar">
+  <div class="nav-container">
+    <span class="nav-title">AppFE</span>
+    <ul class="nav-links">
+      <li><a routerLink="/" routerLinkActive="active">Home</a></li>
+      <li><a routerLink="/upload-video" routerLinkActive="active">Upload</a></li>
+    </ul>
+  </div>
+</nav>
+
 
 <app-list-videos></app-list-videos>

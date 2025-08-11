@@ -1,0 +1,38 @@
+.custom-navbar {
+  background: #2563eb;
+  color: #fff;
+  padding: 0.75rem 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+.nav-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+.nav-links li a.active,
+.nav-links li a:hover {
+  background: #1e40af;
+}

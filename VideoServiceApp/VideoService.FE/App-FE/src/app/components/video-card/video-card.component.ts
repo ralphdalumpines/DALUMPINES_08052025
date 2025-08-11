@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { VideoFile } from '../models/VideoFile';
+import { VideoFile } from '../../models/VideoFile';
 
 @Component({
   selector: 'app-video-card',

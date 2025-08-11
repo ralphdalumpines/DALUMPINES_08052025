@@ -1,13 +1,16 @@
 <div class="video-card card">
-  <img [src]="video().thumbnail" [alt]="video().title" class="video-thumbnail" />
+  <img [src]="video().thumbnail.path" [alt]="video().title" class="video-thumbnail" />
   <div class="video-info">
     <h3>{{ video().title }}</h3>
     <p>{{ video().description }}</p>
     <div class="categories">
         @for (cat of video().categories; track cat)
         {
-          <span class="category">{{ cat }}</span>
+          <span class="category">{{ cat.name }}</span>
         }
     </div>
   </div>
 </div>
+<!-- <app-tooltip [text]="video().title">
+  <img [src]="video().thumbnail" alt="thumbnail">
+</app-tooltip> -->
