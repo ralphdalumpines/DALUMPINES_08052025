@@ -3,11 +3,11 @@
   <div class="nav-container">
     <span class="nav-title">AppFE</span>
     <ul class="nav-links">
-      <li><a routerLink="/" routerLinkActive="active">Home</a></li>
-      <li><a routerLink="/upload-video" routerLinkActive="active">Upload</a></li>
+      <li><a routerLink="/" href="#home" routerLinkActive="active" routerLinkActive="activebutton"
+     ariaCurrentWhenActive="page">Home</a></li>
+      <li><a routerLink="/upload" href="#upload" routerLinkActive="active" routerLinkActive="activebutton"
+     ariaCurrentWhenActive="page">Upload</a></li>
     </ul>
   </div>
 </nav>
-
-
-<app-list-videos></app-list-videos>
+<router-outlet></router-outlet>

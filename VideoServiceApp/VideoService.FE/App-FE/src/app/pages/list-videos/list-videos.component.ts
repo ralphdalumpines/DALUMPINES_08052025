@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VideoFile } from '../../models/VideoFile';
-import { VideoFileService } from '../../services/video-file.service';
+import { VideoFileService } from '../../services/clientService/video-file.service';
 import { VideoCardComponent } from '../../components/video-card/video-card.component';
 import { Result } from '../../models/Result';
 
@@ -15,6 +15,9 @@ export class ListVideosComponent implements OnInit {
   videoResult: Result<VideoFile[]> = { value: [] , isSuccess: true, error: '' };
   videos : VideoFile[] = [];
 
+  ngOnInit() {
+  }
+
   constructor(private videoFileService: VideoFileService) {
     videoFileService.getVideoFiles().subscribe({
       next: (data) => {
@@ -23,8 +26,5 @@ export class ListVideosComponent implements OnInit {
       },
       error: (err) => console.error('Failed to fetch videos', err)
     });
-  }
-
-  ngOnInit() {
   }
 }

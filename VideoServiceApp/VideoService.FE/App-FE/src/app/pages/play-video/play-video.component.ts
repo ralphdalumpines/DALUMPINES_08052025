@@ -1,4 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { VideoFile } from '../../models/VideoFile';
+import { CategoryService } from '../../services/clientService/category.service';
 
 @Component({
   selector: 'app-play-video',
@@ -7,5 +9,5 @@ import { Component, signal } from '@angular/core';
 })
 
 export class PlayVideoComponent {
-  videoUrl = signal<string>('');
+  video = input.required<VideoFile>(); 
 }

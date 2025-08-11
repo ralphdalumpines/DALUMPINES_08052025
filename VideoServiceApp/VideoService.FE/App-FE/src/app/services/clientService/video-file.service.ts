@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { VideoFile } from '../models/VideoFile';
-import { Result } from '../models/Result';
+import { VideoFile } from '../../models/VideoFile';
+import { Result } from '../../models/Result';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class VideoFileService {
 
   getVideoFiles(): Observable<Result<VideoFile[]>> {
     let videos = this.http.get<Result<VideoFile[]>>(`${this.apiUrl}/getvideos`);
-    console.log('Fetched videos:', videos);
+    console.log('Fetched videos:', videos.subscribe(data => console.log(data)));
     return videos;    
   }
 

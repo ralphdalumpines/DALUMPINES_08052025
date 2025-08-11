@@ -1,10 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-interface Category {
-  id: number;
-  name: string;
-}
+import { CategoryService } from '../../services/clientService/category.service';
+import { Result } from '../../models/Result';
+import { Category } from '../../models/Category';
 
 @Component({
   selector: 'app-upload-video',
@@ -12,18 +9,23 @@ interface Category {
   styleUrls: ['./upload-video.component.css']
 })
 
-export class UploadVideoComponent implements OnInit {
+export class UploadVideoComponent implements OnInit  {
   title = signal<string>('');
   description: string = '';
   selectedFile: File | null = null;
   categories: Category[] = [];
   selectedCategories: number[] = [];
-
-  constructor(private http: HttpClient) {}
-
+  categoriesResult: Result<Category[]> = { value: [] , isSuccess: true, error: '' };
+  
   ngOnInit() {
-    this.http.get<Category[]>('/api/categories').subscribe(data => {
-      this.categories = data;
+  }
+
+  constructor(private categoryService: CategoryService) {
+    categoryService.getCategories().subscribe({
+      next: (data) => {
+        this.categories = data.value; // Assuming data.value is an array of Category
+      },
+      error: (err) => console.error('Failed to fetch categories', err)
     });
   }
 
@@ -44,3 +46,4 @@ export class UploadVideoComponent implements OnInit {
     }
   }
 }
+

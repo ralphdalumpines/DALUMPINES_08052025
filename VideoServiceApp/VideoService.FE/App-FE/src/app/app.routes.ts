@@ -1,16 +1,16 @@
 import { Routes } from '@angular/router';
+import { UploadVideoComponent } from './pages/upload-video/upload-video.component';
+import { ListVideosComponent } from './pages/list-videos/list-videos.component';
+import { PlayVideoComponent } from './pages/play-video/play-video.component';
 
 export const routes: Routes = [
     {
-        path: '',
-        loadChildren: () => import('./pages/list-videos/list-videos.component').then(m => m.ListVideosComponent)
+        path: '', component:ListVideosComponent
     },
     {    
-        path: 'upload',
-        loadChildren: () => import('./pages/upload-video/upload-video.component').then(m => m.UploadVideoComponent)
+        path: 'upload', component: UploadVideoComponent
     },
     {
-        path: 'video/:id',
-        loadChildren: () => import('./pages/play-video/play-video.component').then(m => m.PlayVideoComponent)
-    }
+        path: 'video/:id', component:PlayVideoComponent
+    }  
 ];

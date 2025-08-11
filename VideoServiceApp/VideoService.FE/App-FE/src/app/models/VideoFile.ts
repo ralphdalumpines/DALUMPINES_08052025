@@ -3,7 +3,7 @@ import { Thumbnail } from "./Thumbnail";
 
 export interface VideoFile {
   id: number;
-  thumbnail: Thumbnail;
+  thumbnail?: Thumbnail | null;
   title: string;
   description: string;
   categories: Category[];

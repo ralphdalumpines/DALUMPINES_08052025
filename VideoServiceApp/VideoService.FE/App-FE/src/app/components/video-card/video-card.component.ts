@@ -8,5 +8,5 @@ import { VideoFile } from '../../models/VideoFile';
 })
 
 export class VideoCardComponent {
- video = input.required<VideoFile>();
+ video = input.required<VideoFile>(); 
 }

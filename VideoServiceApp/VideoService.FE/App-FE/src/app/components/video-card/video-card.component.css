@@ -33,3 +33,11 @@
   border-radius: 12px;
   font-size: 0.8rem;
 }
+img:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    height: 250px;
+    width: 250px;
+    background-image: url(https://placehold.co/250x250/fdf6e3/333333.jpg?text=Instagram%20Post&font=montserrat);
+}
