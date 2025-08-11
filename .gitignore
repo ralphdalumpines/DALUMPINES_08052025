@@ -10808,3 +10808,5 @@ VideoServiceApp/VideoService.FE/node_modules/yargs-parser/build/lib/yargs-parser
 VideoServiceApp/VideoService.FE/node_modules/yargs-parser/build/lib/yargs-parser.js
 /VideoServiceApp/VideoService.FE/node_modules/.package-lock.json
 /VideoServiceApp/VideoService.FE/package-lock.json
+/VideoServiceApp/VideoService.FE/node_modules
+/VideoServiceApp/VideoService.API/Uploads

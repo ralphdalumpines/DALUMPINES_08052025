@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace App.API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class VideoController : ControllerBase
 {       
     private readonly ILogger<VideoController> _logger;

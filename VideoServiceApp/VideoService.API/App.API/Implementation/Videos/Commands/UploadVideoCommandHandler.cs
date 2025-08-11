@@ -13,6 +13,7 @@ public record UploadVideoCommand(IFormFile File, string Title, string Descriptio
 public class UploadVideoCommandHandler : IRequestHandler<UploadVideoCommand, Result<VideoFile>>
 {
 	private readonly AppDbContext _dbContext;
+	private const string SaveDirectory = @"C:\\Projects\\VideoServiceApp\\VideoServiceApp\\VideoService.API\\";
 
 	public UploadVideoCommandHandler(AppDbContext dbContext)
 	{
@@ -22,7 +23,7 @@ public class UploadVideoCommandHandler : IRequestHandler<UploadVideoCommand, Res
 	public async Task<Result<VideoFile>> Handle(UploadVideoCommand request, CancellationToken cancellationToken)
 	{
 		var file = request.File;
-		var uploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+		var uploadsDir = Path.Combine(SaveDirectory, "Uploads");
 
 		if (!Directory.Exists(uploadsDir))
 			Directory.CreateDirectory(uploadsDir);
@@ -73,7 +74,7 @@ public class UploadVideoCommandHandler : IRequestHandler<UploadVideoCommand, Res
 			});
 		}
 
-		var thumbnailDir = Path.Combine(Directory.GetCurrentDirectory(), "Thumbnails");
+		var thumbnailDir = Path.Combine(SaveDirectory, "Thumbnails");
 
 		if (!Directory.Exists(thumbnailDir))
 			Directory.CreateDirectory(thumbnailDir);
