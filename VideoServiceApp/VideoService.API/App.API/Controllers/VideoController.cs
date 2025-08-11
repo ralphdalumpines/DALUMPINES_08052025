@@ -1,4 +1,3 @@
-using App.API.Dto;
 using App.API.Implementation.Videos.Commands;
 using App.API.Implementation.Videos.Queries;
 using App.API.Validations;
@@ -41,7 +40,7 @@ public class VideoController : ControllerBase
 	}
 
 	[HttpPost("UploadVideo")]
-    public async Task<IActionResult> UploadVideo(IFormFile file, [FromForm] string title, [FromForm] string description, [FromForm] List<CategoryDto> categories)
+    public async Task<IActionResult> UploadVideo(IFormFile file, [FromForm] string title, [FromForm] string description, [FromForm] List<int> categories)
     {
         if (file == null || file.Length == 0)
             return BadRequest("No file uploaded."); 

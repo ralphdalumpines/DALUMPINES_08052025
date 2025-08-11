@@ -4,11 +4,10 @@ using App.API.Service;
 using App.API.Validations;
 using FluentValidation;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace App.API.Implementation.Videos.Commands;
 
-public record UploadVideoCommand(IFormFile File, string Title, string Description, List<CategoryDto> Categories) : IRequest<Result<VideoFile>>;
+public record UploadVideoCommand(IFormFile File, string Title, string Description, List<int> Categories) : IRequest<Result<VideoFile>>;
 
 public class UploadVideoCommandHandler : IRequestHandler<UploadVideoCommand, Result<VideoFile>>
 {
@@ -64,13 +63,13 @@ public class UploadVideoCommandHandler : IRequestHandler<UploadVideoCommand, Res
 
 		foreach (var category in request.Categories)
 		{
-			if (categoriesVideo.Contains(category.Id)) 
+			if (categoriesVideo.Contains(category)) 
 				continue;
 
 			_dbContext.VideoFileCategories.Add(new VideoFileCategory
 			{
 				VideoFileId = video.Id,
-				CategoryId = category.Id
+				CategoryId = category
 			});
 		}
 

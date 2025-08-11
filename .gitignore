@@ -10810,3 +10810,4 @@ VideoServiceApp/VideoService.FE/node_modules/yargs-parser/build/lib/yargs-parser
 /VideoServiceApp/VideoService.FE/package-lock.json
 /VideoServiceApp/VideoService.FE/node_modules
 /VideoServiceApp/VideoService.API/Uploads
+/VideoServiceApp/VideoService.API/Thumbnails

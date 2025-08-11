@@ -1,5 +1,4 @@
-﻿using App.API.Dto;
-using App.API.Implementation.Videos.Commands;
+﻿using App.API.Implementation.Videos.Commands;
 using App.APITests.VideoTests.Mocks;
 using Microsoft.AspNetCore.Http;
 
@@ -33,7 +32,7 @@ internal class UploadVideoTests : BaseVideoTests
 	{
 		var fileMock = FormFileMocks.CreateMockFormFile("test.mp4", "video/mp4", [0x41, 0x42, 0x43, 0x44]);
 
-		var command = new UploadVideoCommand(fileMock, "title", "desc", [new CategoryDto { Name = "category 2", Id = 1 }]);
+		var command = new UploadVideoCommand(fileMock, "title", "desc",  [ 1 ]);
 		var result = await _mediator.Send(command);
 
 		//Assert

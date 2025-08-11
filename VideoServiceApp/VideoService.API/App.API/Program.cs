@@ -1,5 +1,6 @@
 using App.API.Model;
 using MediatR;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -20,6 +21,12 @@ public class Program
 		builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 		builder.Services.AddDbContext<AppDbContext>(options
 			=> options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+		builder.Services.Configure<FormOptions>(options =>
+		{
+			options.ValueLengthLimit = int.MaxValue;
+			options.MultipartBodyLengthLimit = int.MaxValue;
+		});
 
 		// Add CORS services
 		builder.Services.AddCors(options =>
