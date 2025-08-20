@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UploadVideoComponent } from './pages/upload-video/upload-video.component';
 import { AppPrimaryButtonComponent } from './components/primary-button/app-primary-button.component';
@@ -15,6 +17,7 @@ import { TooltipComponent } from './components/tooltip/tooltip.component';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     NgbModule,
     UploadVideoComponent,
     AppPrimaryButtonComponent,

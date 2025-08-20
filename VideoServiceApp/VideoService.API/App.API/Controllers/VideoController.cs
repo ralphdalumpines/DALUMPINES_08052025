@@ -32,10 +32,12 @@ public class VideoController : ControllerBase
     {
         if (id <= 0)
             return BadRequest("Invalid video ID.");
+
         var video = await _mediator.Send(new GetVideoQuery(id));
         
         if (video == null)
             return NotFound($"Video with ID {id} not found.");
+
         return Ok(video);
 	}
 
