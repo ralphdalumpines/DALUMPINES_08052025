@@ -12,13 +12,12 @@ import { Result } from '../../models/Result';
 })
 
 export class ListVideosComponent implements OnInit {
-  videoResult: Result<VideoFile[]> = { value: [] , isSuccess: true, error: '' };
   videos : VideoFile[] = [];
 
   constructor(private videoFileService: VideoFileService) {
-    videoFileService.getVideoFiles().subscribe({
+    
+    this.videoFileService.getVideoFiles().subscribe({
       next: (data) => {
-        this.videoResult = data;
         this.videos = data.value; // Assuming data.value is an array of VideoFile
       },
       error: (err) => console.error('Failed to fetch videos', err)

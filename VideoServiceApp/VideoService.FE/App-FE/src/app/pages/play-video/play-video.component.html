@@ -1,7 +1,7 @@
 <div class="video-player-container">
-  @if (video()) {
-     <video width="320" height="240" autoplay>
-        <source src="video().path" type="video/mp4">
+  @if (path) {
+     <video width="320" height="240" autoplay controls>        
+        <source [src]="path" type="video/mp4">
           Your browser does not support the video tag.
      </video>
   }

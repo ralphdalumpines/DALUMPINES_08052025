@@ -8,7 +8,7 @@ export const routes: Routes = [
         path: '', component:ListVideosComponent
     },
     {    
-        path: 'upload', component: UploadVideoComponent
+        path: 'upload-video', component: UploadVideoComponent
     },
     {
         path: 'play-video/:id', component:PlayVideoComponent

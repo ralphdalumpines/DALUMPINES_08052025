@@ -7,5 +7,5 @@ export interface VideoFile {
   title: string;
   description: string;
   categories: Category[];
-  videoUrl: string;
+  path: string;
 }

@@ -1,5 +1,7 @@
 import { Component, input } from '@angular/core';
 import { VideoFile } from '../../models/VideoFile';
+import { VideoFileService } from '../../services/clientService/video-file.service'; 
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-play-video',
@@ -8,5 +10,22 @@ import { VideoFile } from '../../models/VideoFile';
 })
 
 export class PlayVideoComponent {
-  video = input.required<VideoFile>(); 
+  path : string | null = null; 
+  id : number = 0;
+
+  constructor(private videofileService: VideoFileService,private route: ActivatedRoute) {
+  
+    this.route.params.subscribe(params => {
+      this.id = params['id']; 
+
+      this.videofileService.getVideoFile(this.id).subscribe({
+      next: (data) => {
+        let videoFile : VideoFile = data.value; // Assuming data.value is a VideoFile object
+        this.path = videoFile.path; // Set the path to the video file
+      },
+      error: (err) => console.error('Failed to fetch video', err)
+    }); 
+    });  
+   
+  }
 }

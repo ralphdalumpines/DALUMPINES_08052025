@@ -27,8 +27,8 @@ internal class GetVideoQueryHandler : IRequestHandler<GetVideoQuery, Result<Vide
     public async Task<Result<VideoFile>> Handle(GetVideoQuery request, CancellationToken cancellationToken)
     {
         var video = await _dbContext.VideoFiles
-            .Include(v => v.VideoFileCategories)
-            .Include(v => v.Thumbnail)
+            //.Include(v => v.VideoFileCategories)
+            //.Include(v => v.Thumbnail)
             .FirstOrDefaultAsync(v => v.Id == request.Id, cancellationToken);
 
         if (video == null)
