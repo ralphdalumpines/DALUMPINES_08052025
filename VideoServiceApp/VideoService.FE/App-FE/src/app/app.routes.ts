@@ -11,6 +11,6 @@ export const routes: Routes = [
         path: 'upload', component: UploadVideoComponent
     },
     {
-        path: 'video/:id', component:PlayVideoComponent
+        path: 'play-video/:id', component:PlayVideoComponent
     }  
 ];

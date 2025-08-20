@@ -1,6 +1,7 @@
-<div class="video-card card">
-  <img [src]="video().thumbnail?.path" class="video-thumbnail" />
+<div class="video-card card" (click)="playVideo()" style="cursor:pointer;">   
+  <img [src]="video().thumbnail?.path" class="video-thumbnail" /> 
   <div class="video-info">
+    <app-tooltip [text]="video().title"/>
     <h3>{{ video().title }}</h3>
     <p>{{ video().description }}</p>
     <div class="categories">
@@ -11,6 +12,6 @@
     </div>
   </div>
 </div>
-<!-- <app-tooltip [text]="video().title">
-  <img [src]="video().thumbnail" alt="thumbnail">
-</app-tooltip> -->
+
+
+

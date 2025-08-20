@@ -33,6 +33,7 @@
   border-radius: 12px;
   font-size: 0.8rem;
 }
+
 img:before {
     content: ' ';
     display: block;

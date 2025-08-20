@@ -1,4 +1,5 @@
 <span class="tooltip-wrapper">
-  <ng-content></ng-content>
-  <span class="tooltip-box" *ngif="show">{{ text }}</span>
+      @if (show) {
+      <span class="tooltip-box">{{ text }}</span>
+    }
 </span>
