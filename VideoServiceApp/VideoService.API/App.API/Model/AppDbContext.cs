@@ -9,14 +9,13 @@ public class AppDbContext : DbContext
 	{
 	}
 
-    public DbSet<VideoFile> VideoFiles { get; set; }
+    public virtual DbSet<VideoFile> VideoFiles { get; set; }
 
-    public DbSet<Category> Categories { get; set; }
+    public virtual DbSet<Category> Categories { get; set; }
 
-    public DbSet<VideoFileCategory> VideoFileCategories { get; set; }
+    public virtual DbSet<VideoFileCategory> VideoFileCategories { get; set; }
 
-	public DbSet<VideoThumbnail> VideoThumbnails { get; set; }
-
+	public virtual DbSet<VideoThumbnail> VideoThumbnails { get; set; }
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -67,7 +66,7 @@ public class AppDbContext : DbContext
 
 		modelBuilder.Entity<VideoThumbnail>()
 			.HasOne(vt => vt.VideoFile)
-			.WithMany() // If VideoFile has a collection of VideoThumbnails, use .WithMany(vf => vf.VideoThumbnails)
+			.WithMany() 
 			.HasForeignKey(vt => vt.VideoFileId)
 			.OnDelete(DeleteBehavior.Cascade);
 	}

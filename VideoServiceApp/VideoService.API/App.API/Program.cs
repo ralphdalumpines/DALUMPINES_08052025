@@ -22,6 +22,7 @@ public class Program
 		builder.Services.AddDbContext<AppDbContext>(options
 			=> options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+		// Congfigure FormOptions to allow large file uploads
 		builder.Services.Configure<FormOptions>(options =>
 		{
 			options.ValueLengthLimit = int.MaxValue;
@@ -31,9 +32,9 @@ public class Program
 		// Add CORS services
 		builder.Services.AddCors(options =>
 		{
-			options.AddPolicy("AllowAll", policy =>
+			options.AddPolicy("AllowTrusted", policy =>
 			{
-				policy.AllowAnyOrigin()
+				policy.WithOrigins("https://localhost:4200")
 					  .AllowAnyMethod()
 					  .AllowAnyHeader();
 			});
@@ -52,7 +53,7 @@ public class Program
 
 		app.UseAuthorization();
 
-		app.UseCors("AllowAll");
+		app.UseCors("AllowTrusted");
 
 		app.MapControllers();
 
